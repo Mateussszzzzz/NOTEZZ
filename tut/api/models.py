@@ -17,5 +17,5 @@ def generate_unique_code():
 class Note(models.Model):
     code = models.CharField(
         max_length=8, default=generate_unique_code, unique=True)
-    host = models.CharField(max_length=50, unique=True)
+    host = models.CharField(max_length=50, unique=True, default='' )
     created_at = models.DateTimeField(auto_now_add=True)
