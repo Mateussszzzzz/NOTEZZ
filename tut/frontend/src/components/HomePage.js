@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import RoomJoinPage from "./RoomJoinPage";
-import CreateRoomPage from "./CreateRoomPage";
+import AccountPage from "./AccountPage";
+import CreateNotePage from "./CreateNotePage";
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,6 +8,8 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
+import CustomDrawer from "./CustomDrawer"
+import SettingsSection from "./SettingsSection";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -19,10 +21,11 @@ export default class HomePage extends Component {
       <Router>
         <Switch>
           <Route exact path="/">
-            <p>This is the home page</p>
+            <CustomDrawer />
           </Route>
-          <Route path="/join" component={RoomJoinPage} />
-          <Route path="/create" component={CreateRoomPage} />
+          <Route path="/account" component={AccountPage} />
+          <Route path="/create" component={CreateNotePage} />
+          <Route path="/settings" component={SettingsSection}/>
         </Switch>
       </Router>
     );

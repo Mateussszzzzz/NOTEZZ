@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CustomDrawer from "./CustomDrawer";
 
 export default class RoomJoinPage extends Component {
   constructor(props) {
@@ -6,6 +7,11 @@ export default class RoomJoinPage extends Component {
   }
 
   render() {
-    return <p>This is the Account page</p>;
+    return (
+      <>
+      <p>This is the Account page</p>
+      <CustomDrawer/>
+      </>
+    )
   }
 }

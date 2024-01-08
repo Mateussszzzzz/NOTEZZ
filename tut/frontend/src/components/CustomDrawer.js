@@ -1,16 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import NotesIcon from '@mui/icons-material/Notes';
+import DehazeIcon from '@mui/icons-material/Dehaze';
 import IconButton from '@mui/material/IconButton';
-
+import CreateIcon from '@mui/icons-material/Create';
+import SettingsIcon from '@mui/icons-material/Settings';
 export default function CustomDrawer() {
   const [state, setState] = React.useState({
     left: false,
@@ -32,15 +33,17 @@ export default function CustomDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['', 'create', 'account', 'settings'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton href={text}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index  === 0 ? <NotesIcon /> : index  === 1 ? <CreateIcon /> : index === 2 ? <AccountBoxIcon/> : <SettingsIcon/>}
               </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
+              <ListItemText primary={index  === 0 ? "Notes" : index  === 1 ? "Create new note": index === 2 ? "Account" : "Settings"} />
+            </ListItemButton>"
+            
           </ListItem>
+          
         ))}
       </List>
     </Box>
@@ -50,7 +53,7 @@ export default function CustomDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <IconButton  onClick={toggleDrawer(anchor, true)} ><MailIcon/></IconButton>
+          <IconButton  onClick={toggleDrawer(anchor, true)} ><DehazeIcon/></IconButton>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
