@@ -1,15 +1,15 @@
 from rest_framework import serializers
-from .models import Room
+from .models import Note
 
 
-class RoomSerializer(serializers.ModelSerializer):
+class NoteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Room
+        model = Note
         fields = ('id', 'code', 'host'
                   , 'created_at')
 
 
-class CreateRoomSerializer(serializers.ModelSerializer):
+class CreateNoteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Room
+        model = Note
         fields = ('host',)

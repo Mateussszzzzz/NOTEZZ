@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from .serializers import RoomSerializer, CreateRoomSerializer
-from .models import Room
+from .serializers import NoteSerializer, CreateNoteSerializer
+from .models import Note
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -9,13 +9,13 @@ from rest_framework.response import Response
 # Create your views here.
 
 
-class RoomView(generics.ListAPIView):
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
+class NoteView(generics.ListAPIView):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
 
 
-class CreateRoomView(APIView):
-    serializer_class = CreateRoomSerializer
+class CreateNoteView(APIView):
+    serializer_class = CreateNoteSerializer
 
     def post(self, request, format=None):
         if not self.request.session.exists(self.request.session.session_key):
@@ -24,15 +24,15 @@ class CreateRoomView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             host = serializer.data.get('host')
-            queryset = Room.objects.filter(host=host)
+            queryset = Note.objects.filter(host=host)
             if queryset.exists():
                 room = queryset[0]
                 room.host = host
                 room.save(update_fields=['host'])
-                return Response(RoomSerializer(room).data, status=status.HTTP_200_OK)
+                return Response(NoteSerializer(room).data, status=status.HTTP_200_OK)
             else:
-                room = Room(host=host)
+                room = Note(host=host)
                 room.save()
-                return Response(RoomSerializer(room).data, status=status.HTTP_201_CREATED)
+                return Response(NoteSerializer(room).data, status=status.HTTP_201_CREATED)
 
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
