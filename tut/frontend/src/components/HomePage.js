@@ -23,7 +23,7 @@ export default class HomePage extends Component {
         <Switch>
           <Route exact path="/">
             <CustomDrawer />
-            <CardView style={{left: '50%', top: '50%'}}/>
+            <CardView />
           </Route>
           <Route path="/account" component={AccountPage} />
           <Route path="/create" component={CreateNotePage} />

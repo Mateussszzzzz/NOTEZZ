@@ -33,7 +33,7 @@ export default function CustomDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['', 'create', 'account', 'settings'].map((text, index) => (
+        {['/', 'create', 'account', 'settings'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton href={text}>
               <ListItemIcon>
