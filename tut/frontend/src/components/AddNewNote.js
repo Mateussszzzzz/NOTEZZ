@@ -27,26 +27,25 @@ export default function FormDialog() {
       </IconButton>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleClose} // problem jest taki ze nie wykrywa mi noddea i nie umiem jeszcze nadac atrybutu 'autocomplete'
         PaperProps={{
           component: 'form',
           onSubmit: (event) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            console.log(email);
+            const name = formJson.name;
+            console.log(name);
             handleClose();
           },
         }}
       >
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Create a title</DialogTitle>
         <DialogContent>
           <DialogContentText>
             To create a new note you need to first create title for it.
           </DialogContentText>
           <TextField
-            autoFocus
             required
             margin="dense"
             id="name"
