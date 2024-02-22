@@ -20,6 +20,22 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const handleSubmit = () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        votes_to_skip: this.state.votesToSkip,
+        guest_can_pause: this.state.guestCanPause, /** tu wchodzi useState hook na "name" ale nie chce mi sie narazie tego zmieniac co skopiowałem :>>> */
+      }),
+    };
+    fetch("/api/create-room", requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }
+
+  
+
   return (
     <React.Fragment>
       <IconButton variant="outlined" onClick={handleClickOpen} color='success' size='large'>
@@ -27,16 +43,12 @@ export default function FormDialog() {
       </IconButton>
       <Dialog
         open={open}
-        onClose={handleClose} // problem jest taki ze nie wykrywa mi noddea i nie umiem jeszcze nadac atrybutu 'autocomplete'
+        onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const name = formJson.name;
-            console.log(name);
-            handleClose();
+          onSubmit: () => {
+          handleSubmit();
+          
           },
         }}
       >
