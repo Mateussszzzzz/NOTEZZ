@@ -8,9 +8,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import  IconButton  from '@mui/material/IconButton';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { useEffect } from 'react';
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState("title");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,16 +22,21 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const handleNameChange = (e) => {
+    setName(e.target.value)
+  }
+
   const handleSubmit = () => {
+    const newNote  = { 
+      name
+    };
     const requestOptions = {
+      
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        votes_to_skip: this.state.votesToSkip,
-        guest_can_pause: this.state.guestCanPause, /** tu wchodzi useState hook na "name" ale nie chce mi sie narazie tego zmieniac co skopiowałem :>>> */
-      }),
+      body: JSON.stringify(newNote),
     };
-    fetch("/api/create-room", requestOptions)
+    fetch("/api/create-note", requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data));
   }
